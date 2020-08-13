@@ -2383,7 +2383,7 @@ navigator.mediaDevices.getUserMedia({
 				// values += Math.pow(10, array[i] / 10 / 255);
 				// values += Math.pow((array[i]-128) / 127, 2);
 				// values += array[i]/255;
-				values += spectrum[i] * spectrum[i] * 34;
+				values += spectrum[i] * spectrum[i];
 				// if(i === spectrum.length-1) console.log(555555);
 			}
 			// values /= spectrum.length;
@@ -2413,7 +2413,7 @@ navigator.mediaDevices.getUserMedia({
 				fvalues += (farray[i]) * (farray[i]);
 			}
 			var faverage = Math.sqrt(fvalues / farray.length);
-			console.log(10 * Math.log10(faverage * 2500000000.0));
+			console.log(20 * Math.log10(faverage * 50000.0));
 			// console.log(farray);
 
 			// console.log(10 * Math.log10(values* 10)- 10 * Math.log10(faverage * 2500000000.0));
@@ -2425,7 +2425,7 @@ navigator.mediaDevices.getUserMedia({
 				Plotly.extendTraces('myDiv', {
 					y: [
 						[10 * Math.log10(values * 2500000000.0)],
-						[10 * Math.log10(faverage * 2500000000.0)]
+						[20 * Math.log10(faverage * 50000.0)]
 					]
 				}, [0, 1])
 			
