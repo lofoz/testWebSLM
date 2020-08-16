@@ -473,6 +473,7 @@ navigator.mediaDevices.getUserMedia({
 		var audioContext = new(window.AudioContext || window.webkitAudioContext)({
 			sampleRate: 40960
 		});
+		audioContext.sampleRate = 40960;
 		document.getElementById("myDiv").innerText = audioContext.sampleRate;
 
 		// Create a source from our MediaStream
