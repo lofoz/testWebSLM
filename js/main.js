@@ -515,6 +515,7 @@ navigator.mediaDevices.getUserMedia({
 				document.getElementById("data").innerText = dBA;
 			} else if(dBA.length % 600 == 0){
 				document.getElementById("myDiv").innerText = dBA.length;
+				document.getElementById("t2").innerText = Math.floor((Date.now()-firstTime)/1000);
 			}
 			// values /= spectrum.length;
 			// var average = Math.sqrt(values / length);
