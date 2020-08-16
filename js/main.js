@@ -475,7 +475,7 @@ navigator.mediaDevices.getUserMedia({
 		});
 		audioContext.sampleRate = 40960;
 		document.getElementById("myDiv").innerText = audioContext.sampleRate;
-		document.getElementById("t2").innerText = "7777";
+		document.getElementById("t2").innerText = "9999";
 
 		// Create a source from our MediaStream
 		var source = audioContext.createMediaStreamSource(mediaStream);
@@ -509,14 +509,14 @@ navigator.mediaDevices.getUserMedia({
 			}
 			dBA.push(10 * Math.log10(values * 2500000000.0));
 			// console.log(dBA);
-			if(dBA.length == 18000){
+			if(dBA.length == 21094){
 				node.disconnect(audioContext.destination);
 				console.log("finish");
 				console.log(dBA);
 				document.getElementById("myDiv").innerText = "finish";
 				document.getElementById("t2").innerText = Math.floor((Date.now()-firstTime)/1000);
 				document.getElementById("data").innerText = dBA;
-			} else if(dBA.length % 600 == 0){
+			} else if(dBA.length % 703 == 0){
 				document.getElementById("myDiv").innerText = dBA.length;
 				document.getElementById("t2").innerText = Math.floor((Date.now()-firstTime)/1000);
 			}
