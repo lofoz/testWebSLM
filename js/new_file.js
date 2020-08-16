@@ -508,7 +508,7 @@ navigator.mediaDevices.getUserMedia({
 	})
 	.then(function(mediaStream) {
 		var audioContext = new(window.AudioContext || window.webkitAudioContext)({
-			sampleRate: 40960
+			sampleRate: 48000
 		});
 
 		// Create a source from our MediaStream
@@ -517,7 +517,7 @@ navigator.mediaDevices.getUserMedia({
 		// 4096 = bufferSize (See notes below)
 		// 2 = numberOfInputChannels (i.e. Stereo input)
 		// 2 = numberOfOutputChannels (i.e. Stereo output)
-		var node = audioContext.createScriptProcessor(4096, 1, 1);
+		var node = audioContext.createScriptProcessor(4800, 1, 1);
 		node.onaudioprocess = function(data) {
 			var array = new Float32Array(analyser.frequencyBinCount);
 			// console.log(analyser.frequencyBinCount);
@@ -528,7 +528,7 @@ navigator.mediaDevices.getUserMedia({
 			var farray = data.inputBuffer.getChannelData(0);
 
 
-			var fft = new FFT(4096);
+			var fft = new FFT(4800);
 			var out = fft.createComplexArray();
 			fft.realTransform(out, farray);
 			fft.completeSpectrum(out);
@@ -561,7 +561,7 @@ navigator.mediaDevices.getUserMedia({
 			// console.log(array);
 			// console.log(farray);
 
-			console.log(4096 >> 1);
+			// console.log(4096 >> 1);
 
 
 
@@ -576,17 +576,17 @@ navigator.mediaDevices.getUserMedia({
 			// console.log(faverage);
 			// console.log(data.inputBuffer.sampleRate);
 			// node.disconnect(audioContext.destination);
-			var interval = setInterval(function() {
+			// var interval = setInterval(function() {
 
-				Plotly.extendTraces('myDiv', {
-					y: [
-						[10 * Math.log10(values / 4096 * 2500000000.0)],
-						[10 * Math.log10(faverage * 2500000000.0)]
-					]
-				}, [0, 1])
+			// 	Plotly.extendTraces('myDiv', {
+			// 		y: [
+			// 			[10 * Math.log10(values / 4096 * 2500000000.0)],
+			// 			[10 * Math.log10(faverage * 2500000000.0)]
+			// 		]
+			// 	}, [0, 1])
 
-				// if (++cnt === returnData["dBA_mi_acc"].length) clearInterval(interval);
-			}, 1);
+			// 	// if (++cnt === returnData["dBA_mi_acc"].length) clearInterval(interval);
+			// }, 1);
 		}
 		/////
 		// console.log(data.inputBuffer.getChannelData(0).buffer);
@@ -598,7 +598,7 @@ navigator.mediaDevices.getUserMedia({
 		analyser.connect(node);
 		node.connect(audioContext.destination);
 		// var buffer = new Uint8Array(an.fftSize);
-		analyser.fftSize = 4096;
+		analyser.fftSize = 4800;
 		analyser.smoothingTimeConstant = 0;
 		// analyser.maxDecibels = 120;
 		// analyser.minDecibels = 0;
@@ -637,88 +637,88 @@ navigator.mediaDevices.getUserMedia({
 
 
 
-		var reverseTable = new Uint32Array(4096);
+		// var reverseTable = new Uint32Array(4096);
 
-		var limit = 1;
-		var bit = 4096 >> 1;
+		// var limit = 1;
+		// var bit = 4096 >> 1;
 
-		var i;
+		// var i;
 
-		while (limit < 4096) {
-			for (i = 0; i < limit; i++) {
-				reverseTable[i + limit] = reverseTable[i] + bit;
-			}
+		// while (limit < 4096) {
+		// 	for (i = 0; i < limit; i++) {
+		// 		reverseTable[i + limit] = reverseTable[i] + bit;
+		// 	}
 
-			limit = limit << 1;
-			bit = bit >> 1;
-		}
-		console.log(reverseTable);
+		// 	limit = limit << 1;
+		// 	bit = bit >> 1;
+		// }
+		// console.log(reverseTable);
 
 	});
 
 
-Plotly.newPlot('myDiv_cal', [{
-	y: [],
-	mode: 'lines',
-	name: 'mobile phone',
-	line: {
-		color: '#80CAF6',
-		width: 1
-	}
-}, {
-	y: [],
-	mode: 'lines',
-	name: 'SLM',
-	line: {
-		color: '#DF56F1',
-		width: 1
-	}
-}], {
-	template: {
-		layout: {
-			title: 'Sound Level (Calibration) MAE: ' + returnData["MAE"].toFixed(2) + ' dBA',
-			showlegend: true,
-			plot_bgcolor: "#343a40",
-			paper_bgcolor: "#FFF3",
-			font: {
-				family: 'Verdana, Geneva, Tahoma, sans-serif',
-				size: 18,
-				color: '#FFFFFF'
-			},
-			xaxis: {
-				title: {
-					text: 'Time(second)',
-					font: {
-						family: 'Verdana, Geneva, Tahoma, sans-serif',
-						size: 18,
-						color: '#FFFFFF'
-					},
-				}
-			},
-			yaxis: {
-				title: {
-					text: 'dBA',
-					font: {
-						family: 'Verdana, Geneva, Tahoma, sans-serif',
-						size: 18,
-						color: '#FFFFFF'
-					}
-				}
-			},
-			legend: {
-				x: 1,
-				xanchor: 'right',
-				y: 0,
-				font: {
-					family: 'sans-serif',
-					size: 12,
-					color: '#000'
-				},
-				bgcolor: '#E2E2E2',
-				bordercolor: '#FFFFFF',
-				borderwidth: 2
-			}
-		}
+// Plotly.newPlot('myDiv_cal', [{
+// 	y: [],
+// 	mode: 'lines',
+// 	name: 'mobile phone',
+// 	line: {
+// 		color: '#80CAF6',
+// 		width: 1
+// 	}
+// }, {
+// 	y: [],
+// 	mode: 'lines',
+// 	name: 'SLM',
+// 	line: {
+// 		color: '#DF56F1',
+// 		width: 1
+// 	}
+// }], {
+// 	template: {
+// 		layout: {
+// 			title: 'Sound Level (Calibration) MAE: ' + returnData["MAE"].toFixed(2) + ' dBA',
+// 			showlegend: true,
+// 			plot_bgcolor: "#343a40",
+// 			paper_bgcolor: "#FFF3",
+// 			font: {
+// 				family: 'Verdana, Geneva, Tahoma, sans-serif',
+// 				size: 18,
+// 				color: '#FFFFFF'
+// 			},
+// 			xaxis: {
+// 				title: {
+// 					text: 'Time(second)',
+// 					font: {
+// 						family: 'Verdana, Geneva, Tahoma, sans-serif',
+// 						size: 18,
+// 						color: '#FFFFFF'
+// 					},
+// 				}
+// 			},
+// 			yaxis: {
+// 				title: {
+// 					text: 'dBA',
+// 					font: {
+// 						family: 'Verdana, Geneva, Tahoma, sans-serif',
+// 						size: 18,
+// 						color: '#FFFFFF'
+// 					}
+// 				}
+// 			},
+// 			legend: {
+// 				x: 1,
+// 				xanchor: 'right',
+// 				y: 0,
+// 				font: {
+// 					family: 'sans-serif',
+// 					size: 12,
+// 					color: '#000'
+// 				},
+// 				bgcolor: '#E2E2E2',
+// 				bordercolor: '#FFFFFF',
+// 				borderwidth: 2
+// 			}
+// 		}
 
-	}
-});
+// 	}
+// });
