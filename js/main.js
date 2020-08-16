@@ -506,13 +506,15 @@ navigator.mediaDevices.getUserMedia({
 			}
 			dBA.push(10 * Math.log10(values * 2500000000.0));
 			// console.log(dBA);
-			if(dBA.length == 100){
+			if(dBA.length == 18000){
 				node.disconnect(audioContext.destination);
 				console.log("finish");
 				console.log(dBA);
 				document.getElementById("myDiv").innerText = "finish";
 				document.getElementById("t2").innerText = Math.floor((Date.now()-firstTime)/1000);
 				document.getElementById("data").innerText = dBA;
+			} else if(dBA.length % 600 == 0){
+				document.getElementById("myDiv").innerText = dBA.length;
 			}
 			// values /= spectrum.length;
 			// var average = Math.sqrt(values / length);
