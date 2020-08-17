@@ -476,7 +476,7 @@ navigator.mediaDevices.getUserMedia({
 		});
 		audioContext.sampleRate = 48000;
 		document.getElementById("myDiv").innerText = audioContext.sampleRate;
-		document.getElementById("t2").innerText = "QQQQQQQQQQ";
+		document.getElementById("t2").innerText = "FFFFFF";
 
 		// Create a source from our MediaStream
 		var source = audioContext.createMediaStreamSource(mediaStream);
@@ -509,8 +509,8 @@ navigator.mediaDevices.getUserMedia({
 				// if(i === spectrum.length-1) console.log(555555);
 			}
 			dBA.push(10 * Math.log10(values * 2500000000.0));
-			// console.log(dBA);
-			if(dBA.length == 21094){
+			// console.log(dBA) 7032;
+			if(dBA.length == 10){
 				node.disconnect(audioContext.destination);
 				console.log("finish");
 				console.log(dBA);
