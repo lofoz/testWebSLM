@@ -476,7 +476,7 @@ navigator.mediaDevices.getUserMedia({
 		});
 		audioContext.sampleRate = 48000;
 		document.getElementById("myDiv").innerText = audioContext.sampleRate;
-		document.getElementById("t2").innerText = "9999";
+		document.getElementById("t2").innerText = "QQQQQQQQQQ";
 
 		// Create a source from our MediaStream
 		var source = audioContext.createMediaStreamSource(mediaStream);
